@@ -346,8 +346,8 @@ const WorldClock: React.FC = () => {
           />
         ))}
         
-        <button className="add-timezone-btn" onClick={() => setShowTimezoneSelector(!showTimezoneSelector)}>
-          <Plus size={16} />
+        <button className="add-timezone-btn" onClick={() => setShowTimezoneSelector(true)}>
+          <Plus size={24} />
         </button>
       </div>
       

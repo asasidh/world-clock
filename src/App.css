@@ -254,17 +254,20 @@ body {
   align-items: center;
   justify-content: center;
   padding: 15px;
-  background: none;
+  background-color: #1e293b;
   border: none;
-  color: #3b82f6;
+  color: #94a3b8;
   cursor: pointer;
   width: 100%;
   border-bottom: 1px solid #334155;
+  transition: background-color 0.2s;
 }
 
 .add-timezone-btn:hover {
   background-color: #334155;
 }
+
+
 
 /* Timezone Selector */
 .timezone-selector {
