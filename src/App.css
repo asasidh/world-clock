@@ -1,0 +1,527 @@
+/* Base styles */
+body {
+  background: #1e293b;
+  color: #e2e8f0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow: hidden;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.world-clock-compact {
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #1e293b;
+  overflow: hidden;
+}
+
+/* Calendar Header */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 15px 4px; /* Reduced padding */
+  border-bottom: 1px solid #334155;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.current-month {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.month-nav, .float-window-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.float-window-btn {
+  color: #3b82f6;
+  background-color: rgba(59, 130, 246, 0.1);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.month-nav:hover {
+  color: #e2e8f0;
+}
+
+.float-window-btn:hover {
+  background-color: rgba(59, 130, 246, 0.2);
+  transform: scale(1.1);
+}
+
+/* Calendar Grid */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background-color: #1e293b;
+  padding: 0 5px;
+}
+
+.weekday-header {
+  text-align: center;
+  padding: 8px 0;
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.calendar-day {
+  text-align: center;
+  padding: 8px 0;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2px auto;
+}
+
+.calendar-day:hover {
+  background-color: #334155;
+}
+
+.other-month {
+  color: #475569;
+}
+
+.today {
+  background-color: #ef4444;
+  color: white;
+}
+
+.selected {
+  border: 2px solid #3b82f6;
+}
+
+/* Clock Styles */
+.clocks-compact {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 0;
+  flex: 1;
+}
+
+.clock-compact {
+  padding: 8px 15px 8px 40px; /* Reduced vertical padding */
+  border-bottom: 1px solid #334155;
+  position: relative;
+  height: 100px; /* Reduced fixed height */
+  box-sizing: border-box;
+  cursor: move; /* Indicate draggable */
+  user-select: none; /* Prevent text selection during drag */
+  margin-bottom: 8px; /* Add spacing between cells */
+}
+
+.clock-compact.is-dragging {
+  border: 1px dashed #3b82f6;
+  background-color: rgba(30, 41, 59, 0.8);
+}
+
+.drag-handle {
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  cursor: grab;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.drag-handle:hover {
+  opacity: 1;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+.city-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #e2e8f0;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.city-with-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-indicator {
+  margin-right: 0;
+  transform: scale(1.5);
+}
+
+.status-indicator.optimal {
+  color: #48bb78;
+}
+
+.day-label {
+  font-size: 12px; /* Smaller font */
+  color: #94a3b8;
+  margin-bottom: 3px; /* Reduced margin */
+  margin-left: 20px;
+  height: 16px; /* Reduced fixed height */
+}
+
+.time-large {
+  font-size: 32px; /* Slightly smaller font */
+  font-weight: 700;
+  margin-bottom: 1px; /* Reduced margin */
+  letter-spacing: -1px;
+  margin-left: 20px;
+  height: 36px; /* Reduced fixed height */
+  line-height: 36px;
+}
+
+.ampm {
+  font-size: 16px;
+  margin-left: 3px;
+  margin-right: 5px;
+}
+
+.timezone-code-right {
+  position: absolute;
+  right: 15px;
+  bottom: 10px; /* Align with the clock display */
+  font-size: 14px;
+  color: #94a3b8;
+  font-weight: normal;
+}
+
+/* Removed timezone-offset class as it's no longer used */
+
+.remove-btn-compact {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3; /* Ensure it's above other elements including timezone code */
+}
+
+.remove-btn-compact:hover {
+  color: #ef4444;
+}
+
+/* Add Timezone Button */
+.add-timezone-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  background: none;
+  border: none;
+  color: #3b82f6;
+  cursor: pointer;
+  width: 100%;
+  border-bottom: 1px solid #334155;
+}
+
+.add-timezone-btn:hover {
+  background-color: #334155;
+}
+
+/* Timezone Selector */
+.timezone-selector {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #1e293b;
+  border-top: 1px solid #334155;
+  max-height: 40vh;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.timezone-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.timezone-option {
+  padding: 12px 15px;
+  border-bottom: 1px solid #334155;
+  cursor: pointer;
+}
+
+.timezone-option:hover {
+  background-color: #334155;
+}
+
+/* Time Slider */
+.time-slider-compact {
+  padding: 8px 15px;
+  background-color: #0f172a;
+  border-top: 1px solid #334155;
+  border-bottom: 1px solid #334155;
+  display: flex;
+  align-items: center;
+  height: 44px; /* Fixed height to prevent wobbling */
+  box-sizing: border-box;
+}
+
+.reset-button {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid #475569;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-right: 15px;
+  opacity: 0.5;
+  padding: 0;
+}
+
+.reset-button.active {
+  opacity: 1;
+  color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.reset-button:hover:not(:disabled) {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.reset-button:disabled {
+  cursor: not-allowed;
+}
+
+.time-display-container {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  width: 60px; /* Fixed width to prevent wobbling */
+}
+
+.time-display-value {
+  font-size: 12px;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+.slider-compact {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: #334155;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  margin: 0 5px; /* Consistent margins */
+}
+
+.slider-compact::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #3b82f6;
+  cursor: pointer;
+  border: 2px solid #e2e8f0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
