@@ -30,13 +30,9 @@ const DraggableClock: React.FC<{
   const [{ isDragging }, drag] = useDrag({
     type: 'timezone',
     item: { index, id: timezone.id, type: 'timezone' } as DragItem,
-    collect: (monitor) => ({
+    collect: (monitor: any) => ({
       isDragging: monitor.isDragging(),
     }),
-    // For touch devices
-    options: {
-      touch: true,
-    },
   });
   
   const [, drop] = useDrop<DragItem>({
@@ -239,8 +235,9 @@ const WorldClock: React.FC = () => {
 
   // Choose backend based on device type
   const backend = isTouchDevice ? TouchBackend : HTML5Backend;
+  const options = isTouchDevice ? { enableMouseEvents: true } : {};
   return (
-    <DndProvider backend={backend}>
+    <DndProvider backend={backend} options={options}>
       <div className="world-clock-compact">
       {/* Calendar Header */}
       <div className="calendar-header">
