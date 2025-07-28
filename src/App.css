@@ -377,6 +377,72 @@ body {
   border: 2px solid #e2e8f0;
 }
 
+/* Responsive adjustments for mobile */
+@media (max-width: 480px) {
+  .world-clock-compact {
+    font-size: 13px;
+  }
+
+  .calendar-header {
+    padding: 8px 10px;
+  }
+
+  .current-month {
+    font-size: 15px;
+  }
+
+  .calendar-day {
+    padding: 6px 0;
+    width: 28px;
+    height: 28px;
+  }
+
+  .clock-compact {
+    padding: 8px 10px 8px 35px;
+    height: 90px;
+  }
+
+  .drag-handle {
+    left: 5px;
+    width: 25px;
+    opacity: 0.7;
+  }
+
+  .time-large {
+    font-size: 28px;
+    height: 32px;
+    line-height: 32px;
+  }
+
+  .ampm {
+    font-size: 14px;
+  }
+
+  .timezone-code-right {
+    font-size: 13px;
+    right: 10px;
+    bottom: 8px;
+  }
+
+  .remove-btn-compact {
+    top: 8px;
+    right: 8px;
+  }
+
+  .time-slider-compact {
+    padding: 8px 10px;
+  }
+
+  .reset-button {
+    margin-right: 10px;
+  }
+
+  .time-display-container {
+    width: 55px;
+    margin-right: 10px;
+  }
+}
+
 
 
 

@@ -7,6 +7,7 @@ import type { TimezoneData } from './data/timezones';
 import { Plus, ChevronLeft, ChevronRight, RefreshCw, GripVertical, X, ExternalLink } from 'lucide-react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { TouchBackend } from 'react-dnd-touch-backend';
 
 // Define the type for draggable items
 interface DragItem {
@@ -29,7 +30,7 @@ const DraggableClock: React.FC<{
   const [{ isDragging }, drag] = useDrag({
     type: 'timezone',
     item: { index, id: timezone.id, type: 'timezone' } as DragItem,
-    collect: (monitor) => ({
+    collect: (monitor: any) => ({
       isDragging: monitor.isDragging(),
     }),
   });
@@ -229,8 +230,14 @@ const WorldClock: React.FC = () => {
     setCurrentMonth(moment(currentMonth).subtract(1, 'month'));
   };
 
+  // Simple check for touch devices
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+  // Choose backend based on device type
+  const backend = isTouchDevice ? TouchBackend : HTML5Backend;
+  const options = isTouchDevice ? { enableMouseEvents: true } : {};
   return (
-    <DndProvider backend={HTML5Backend}>
+    <DndProvider backend={backend} options={options}>
       <div className="world-clock-compact">
       {/* Calendar Header */}
       <div className="calendar-header">
