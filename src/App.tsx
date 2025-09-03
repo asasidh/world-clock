@@ -8,6 +8,7 @@ import { Plus, ChevronLeft, ChevronRight, RefreshCw, GripVertical, X, ExternalLi
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TouchBackend } from 'react-dnd-touch-backend';
+import { useResponsiveLayout } from './hooks/useResponsiveLayout';
 
 // Define the type for draggable items
 interface DragItem {
@@ -24,7 +25,8 @@ const DraggableClock: React.FC<{
   moveTimezone: (dragIndex: number, hoverIndex: number) => void;
   onRemove?: () => void;
   isOptimalMeetingTime: boolean;
-}> = ({ timezone, currentTime, index, moveTimezone, onRemove, isOptimalMeetingTime }) => {
+  isHorizontalLayout?: boolean;
+}> = ({ timezone, currentTime, index, moveTimezone, onRemove, isOptimalMeetingTime, isHorizontalLayout = false }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   
   const [{ isDragging }, drag] = useDrag({
@@ -79,7 +81,7 @@ const DraggableClock: React.FC<{
   return (
     <div 
       ref={ref} 
-      className={`clock-compact ${isDragging ? 'is-dragging' : ''}`}
+      className={`clock-compact ${isDragging ? 'is-dragging' : ''} ${isHorizontalLayout ? 'horizontal-item' : ''}`}
       style={{ opacity: isDragging ? 0.5 : 1 }}
     >
       <div className="drag-handle">
@@ -230,6 +232,9 @@ const WorldClock: React.FC = () => {
     setCurrentMonth(moment(currentMonth).subtract(1, 'month'));
   };
 
+  // Responsive layout detection
+  const { isHorizontalLayout } = useResponsiveLayout();
+
   // Simple check for touch devices
   const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
@@ -340,7 +345,7 @@ const WorldClock: React.FC = () => {
       </div>
       
       {/* Clock Display */}
-      <div className="clocks-compact">
+      <div className={`clocks-compact ${isHorizontalLayout ? 'horizontal' : ''}`}>
         {selectedTimezones.map((timezone, index) => (
           <DraggableClock
             key={timezone.id}
@@ -350,10 +355,11 @@ const WorldClock: React.FC = () => {
             moveTimezone={moveTimezone}
             onRemove={selectedTimezones.length > 1 ? () => handleRemoveTimezone(timezone.id) : undefined}
             isOptimalMeetingTime={optimalTimezones.includes(timezone.id)}
+            isHorizontalLayout={isHorizontalLayout}
           />
         ))}
         
-        <button className="add-timezone-btn" onClick={() => setShowTimezoneSelector(true)}>
+        <button className={`add-timezone-btn ${isHorizontalLayout ? 'horizontal' : ''}`} onClick={() => setShowTimezoneSelector(true)}>
           <Plus size={24} />
         </button>
       </div>

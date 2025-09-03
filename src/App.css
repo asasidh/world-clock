@@ -131,6 +131,15 @@ body {
   flex: 1;
 }
 
+/* Horizontal layout for clocks container */
+.clocks-compact.horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 8px;
+  padding: 8px;
+}
+
 .clock-compact {
   padding: 8px 15px 8px 40px; /* Reduced vertical padding */
   border-bottom: 1px solid #334155;
@@ -140,6 +149,18 @@ body {
   cursor: move; /* Indicate draggable */
   user-select: none; /* Prevent text selection during drag */
   margin-bottom: 8px; /* Add spacing between cells */
+}
+
+/* Horizontal layout styling for individual clock cards */
+.clock-compact.horizontal-item {
+  flex: 1 1 280px; /* allow wrapping with a sensible min width */
+  min-width: 260px;
+  max-width: 360px;
+  margin-bottom: 0;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  background-color: #1e293b;
+  padding: 8px 15px 8px 30px; /* slightly narrower left padding */
 }
 
 .clock-compact.is-dragging {
@@ -265,6 +286,17 @@ body {
 
 .add-timezone-btn:hover {
   background-color: #334155;
+}
+
+/* Add Timezone button in horizontal layout behaves like a card */
+.add-timezone-btn.horizontal {
+  flex: 1 1 280px;
+  min-width: 260px;
+  max-width: 360px;
+  height: 100px;
+  border: 1px dashed #334155;
+  border-radius: 8px;
+  margin-bottom: 0;
 }
 
 
