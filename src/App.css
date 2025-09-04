@@ -20,7 +20,10 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  height: 100vh;
+  height: 100vh; /* Fallback for older browsers */
+  /* Set height to fill available screen space, addressing mobile browser UI bars */
+  height: -webkit-fill-available;
+  height: 100dvh; /* Use dynamic viewport height where supported */
   display: flex;
   flex-direction: column;
   background-color: #1e293b;
